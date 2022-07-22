@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Copy To Clipboard</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+      }
+      body {
+        height: 125vh;
+        width: 100vw;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.16),
+            rgba(0, 0, 0, 0.8)
+          ),
+          url('https://images.unsplash.com/photo-1502847427791-d0194ec4cff4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        padding: 0 2rem;
+      }
+      .center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .container {
+        position: absolute;
+        top: 1rem;
+      }
+      header {
+        background: linear-gradient(
+          to top right,
+          rgba(215, 26, 196, 0.856),
+          rgba(57, 132, 208, 0.877)
+        );
+        padding: 2rem;
+        font-size: 2rem;
+        text-transform: capitalize;
+        letter-spacing: 0.38rem;
+        color: white;
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        text-align: center;
+        box-shadow: inset 0 5px 5px white;
+        width: 100%;
+      }
+      textarea {
+        padding: 1.2rem;
+        border: none;
+        font-size: 1.4rem;
+        box-shadow: 6px 6px 13px rgb(255, 162, 219);
+        line-height: 2rem;
+        border-bottom-left-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+        resize: none;
+      }
+      textarea::placeholder {
+        text-transform: capitalize;
+      }
+      textarea:focus {
+        outline: 0;
+      }
+      .action-buttons {
+        margin-top: 2rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 6rem;
+      }
+      .action-buttons button {
+        width: 20%;
+        height: 3.5rem;
+        border: none;
+        border-radius: 1rem;
+        cursor: pointer;
+        color: #fff;
+        background-color: rgb(23, 27, 27);
+        box-shadow: 1px 3px 6px cyan;
+        transition: all 0.1s ease-out;
+      }
+      .action-buttons button:hover {
+        transform: scale(1.05);
+        color: cyan;
+      }
+      .action-buttons button:active {
+        transform: scale(1.04);
+        box-shadow: 0.5px 2px 2px cyan;
+        margin-top: 0.2rem;
+      }
+      .preview-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 50rem;
+        width: 80vw;
+      }
+      .preview-box textarea {
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+      }
+      .preview-btns {
+        width: 58rem;
+      }
+      .preview-btns button {
+        width: 10rem;
+      }
+      .preview-btns .action-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+      @media only screen and (max-width: 615px) {
+        textarea {
+          width: 50rem;
+          height: 20rem;
+        }
+        .preview-btns {
+          width: 50rem;
+        }
+      }
+      @media only screen and (max-width: 530px) {
+        textarea {
+          width: 36.5rem;
+          height: 30rem;
+        }
+        header {
+          font-size: 1.5rem;
+        }
+        .action-buttons button {
+          width: 25%;
+        }
+        .preview-btns {
+          width: 36rem;
+        }
+      }
+      @media only screen and (max-width: 378px) {
+        html {
+          font-size: 52%;
+        }
+        header {
+          padding: 1.2rem;
+          font-size: 1.6rem;
+        }
+        textarea {
+          width: 38rem;
+          height: 40rem;
+          font-size: 1.8rem;
+        }
+        .action-buttons button {
+          width: 30%;
+        }
+      }
+      @media only screen and (max-width: 347px) {
+        textarea {
+          width: 32.95rem;
+          height: 45rem;
+        }
+        header {
+          font-size: 1.375rem;
+        }
+        .action-buttons-box {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          position: relative;
+        }
+        .action-buttons {
+          flex-direction: column;
+          gap: 2rem;
+        }
+        .action-buttons:last-child {
+          position: absolute;
+          top: 72rem;
+        }
+        .action-buttons button {
+          width: 40%;
+          padding: 2.5rem 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      @media only screen and (max-width: 300px) {
+        header {
+          font-size: 1rem;
+        }
+        textarea {
+          width: 30rem;
+          height: 48rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="center">
+    <div class="container">
+      <header>
+        <h1>copy to clipboard</h1>
+      </header>
+      <main>
+        <textarea
+          placeholder="enter text to copy..."
+          rows="10"
+          cols="70"
+        ></textarea>
+      </main>
+      <div class=".action-buttons-box">
+        <section class="action-buttons">
+          <button class="select">Select Text</button>
+          <button class="copy">Copy Text</button>
+          <button class="clear">Clear Text</button>
+        </section>
+        <section class="action-buttons">
+          <button class="upper">Convert To Uppercase</button>
+          <button class="lower">Convert To Lowercase</button>
+          <button class="remove-spaces">Remove Spaces</button>
+        </section>
+      </div>
+    </div>
+    <div class="preview-box">
+      <textarea
+        cols="70"
+        rows="5"
+        placeholder="paste the text here..."
+        id="preview-area"
+      ></textarea>
+    </div>
+    <div class="preview-btns action-buttons-box">
+      <div class="action-buttons">
+        <button id="paste">Paste Text</button>
+        <button id="clear_preview">Clear Text</button>
+      </div>
+    </div>
+    <script>
+      const textarea = document.querySelector('textarea');
+      const selectText = document.querySelector('.select');
+      const copyText = document.querySelector('.copy');
+      const clearText = document.querySelector('.clear');
+      const uppercase = document.querySelector('.upper');
+      const lowercase = document.querySelector('.lower');
+      const removeSpaces = document.querySelector('.remove-spaces');
+      const paste = document.getElementById('paste');
+      const previewArea = document.querySelector('#preview-area');
+      const clearPreview = document.getElementById('clear_preview');
+      const selectTextHandler = () => {
+        textarea.focus();
+        textarea.select();
+      };
+      selectText.addEventListener('click', selectTextHandler);
+      copyText.addEventListener('click', () => {
+        selectTextHandler();
+        document.execCommand('copy');
+      });
+      clearText.addEventListener('click', () => {
+        textarea.value = '';
+      });
+      uppercase.addEventListener('click', () => {
+        textarea.value = textarea.value.toUpperCase();
+      });
+      lowercase.addEventListener('click', () => {
+        textarea.value = textarea.value.toLowerCase();
+      });
+      removeSpaces.addEventListener('click', () => {
+        let text = textarea.value;
+        textarea.value = text.split(' ').join('');
+      });
+      paste.addEventListener('click', async () => {
+        const text = await navigator.clipboard.readText();
+        previewArea.value += text + ' ';
+      });
+      clearPreview.addEventListener('click', () => {
+        previewArea.value = '';
+      });
+    </script>
+  </body>
+</html>
